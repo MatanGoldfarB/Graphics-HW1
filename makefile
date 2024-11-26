@@ -1,11 +1,14 @@
 # Compiler
 CXX = g++
 
+#opencv 
+opencv = /opt/homebrew/Cellar/opencv/4.10.0_12
+
 # Compiler flags
-CXXFLAGS = -std=c++17 -Wall -I/opt/homebrew/Cellar/opencv/4.10.0_12/include/opencv4
+CXXFLAGS = -std=c++17 -Wall -I$(opencv)/include/opencv4
 
 # Linker flags
-LDFLAGS = -L/opt/homebrew/Cellar/opencv/4.10.0_12/lib -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs
+LDFLAGS = -L$(opencv)/lib -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_imgcodecs
 
 # Target executable
 TARGET = hw1
