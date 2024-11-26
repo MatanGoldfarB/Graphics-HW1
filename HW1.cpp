@@ -311,9 +311,11 @@ void cannyFilter(const Mat& grayImg, Mat& canny) {
     int kernelSize = 5;
     double sigma = 1.4;
     Mat kernel = generateGaussianKernel(kernelSize, sigma);
-    Mat gausFiltered, gray64F;
+    Mat gausFiltered, gray64F, gausFilteredDisplay;
     grayImg.convertTo(gray64F, CV_64F);
     customFilter2D(gray64F, gausFiltered, kernel);
+    normalize(gausFiltered, gausFilteredDisplay, 0, 255, NORM_MINMAX);
+    gausFilteredDisplay.convertTo(gausFilteredDisplay, CV_8U);
 
     // Second step: Gradient Calculation
     Mat angle, grad;
@@ -336,7 +338,7 @@ void cannyFilter(const Mat& grayImg, Mat& canny) {
     double highThresh = 0.2 * maxGrad; // Set high threshold as 20% of max gradient
     double lowThresh = 0.1 * highThresh; // Set low threshold as 10% of high threshold
     doubleThreshold(nms, edges, lowThresh, highThresh);
-    showFourImages(gausFiltered, gradDisplay, nmsDisplay, edges);
+    showFourImages(gausFilteredDisplay, gradDisplay, nmsDisplay, edges);
     // Fifth step: Hysteresis
     hysteresis(edges, canny);
 }
@@ -356,6 +358,8 @@ int main(int argc, char** argv) {
         cout << "Could not open or find the image!" << endl;
         return -1;
     }
+    Size newSize(256, 256); // Desired size
+    resize(image, image, newSize);
 
     // Task 1: Graycale Image
     Mat grayImg;

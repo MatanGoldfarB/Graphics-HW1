@@ -1,0 +1,20 @@
+https://github.com/MatanGoldfarB/Graphics-HW1.git
+
+To compile the project read the ReadMe file in the GitHub
+
+The flow of the project:
+- Loading the image given as an argument
+- GrayScale Image
+- Canny Algorithm: 
+	Gaussian Filter - using 
+	Gradient Calculation
+	Non-Max Suppression
+	Double Thresholding
+	Hysteresis
+- Halftone Image
+- FloyedSteinberg Image
+
+While running the program you'll see the gray scale image 
+Pressing 0 will show the Canny algorithm for each step 
+Pressing 0 again will bring up the result
+Then the same for Halftone and FloyedSteinberg images and last 0 to close it.
